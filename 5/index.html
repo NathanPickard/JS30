@@ -29,6 +29,7 @@
     .panels {
       min-height: 100vh;
       overflow: hidden;
+      display: flex;
     }
 
     .panel {
@@ -37,12 +38,18 @@
       color: white;
       text-align: center;
       align-items: center;
-      transition: font-size 0.7s cubic-bezier(0.61, -0.19, 0.7, -0.11),
-      flex 0.7s cubic-bezier(0.61, -0.19, 0.7, -0.11),
-      background 0.2s;
+      transition: 
+        font-size 0.7s cubic-bezier(0.61, -0.19, 0.7, -0.11),
+        flex 0.7s cubic-bezier(0.61, -0.19, 0.7, -0.11),
+        background 0.2s;
       font-size: 20px;
       background-size: cover;
       background-position: center;
+      flex: 1;
+      justify-content: center;
+      align-items: cneter;
+      display: flex;
+      flex-direction: column;
     }
 
     .panel1 {
@@ -65,10 +72,31 @@
       background-image: url(https://source.unsplash.com/3MNzGlQM7qs/1500x1500);
     }
 
-    .panel>* {
+    /* flex items */
+    .panel > * {
       margin: 0;
       width: 100%;
       transition: transform 0.5s;
+      flex: 1 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .panel > *:first-child {
+      transform: translateY(-100%);
+    }
+
+    .panel.open-active > *:first-child {
+      transform: translateY(0);
+    }
+
+    .panel > *:last-child {
+      transform: translateY(100%);
+    }
+
+    .panel.open-active > *:last-child {
+      transform: translateY(0);
     }
 
     .panel p {
@@ -83,8 +111,10 @@
     }
 
     .panel.open {
+      flex: 5;
       font-size: 40px;
     }
+
   </style>
 
   <div class="panels">
@@ -116,6 +146,22 @@
   </div>
 
   <script>
+    const panels = document.querySelectorAll('.panel');
+
+    function toggleOpen() {
+      this.classList.toggle('open');
+    }
+
+    function toggleActive(e) {
+      console.log(e.propertyName);
+      if(e.propertyName.includes('flex')) {
+        this.classList.toggle('open-active');
+      }
+    }
+
+    panels.forEach(panel => panel.addEventListener('click', toggleOpen));
+    panels.forEach(panel => panel.addEventListener('transitionend',
+     toggleActive));
 
   </script>
 
