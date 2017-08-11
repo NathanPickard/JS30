@@ -1,0 +1,14 @@
+{
+  "name": "19",
+  "version": "1.0.0",
+  "description": "",
+  "main": "scripts.js",
+  "scripts": {
+    "start": "browser-sync start --server --files '*.css, *.html, *.js'"
+  },
+  "author": "Nathan Pickard <nathan.pickard87@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.12.5"
+  }
+}
